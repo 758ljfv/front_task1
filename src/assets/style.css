@@ -1,0 +1,31 @@
+.b-main{
+    margin: 150px;
+    padding: 50px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 10;
+
+}
+.b-main__item{
+    border: 1px solid #000;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.b-main__search{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.btn-custom{
+    font-size: 20px;
+    background-color: #42b983;
+    padding: 10px;
+    align-items: center;
+    color: #fff;
+    text-transform: uppercase;
+}
+.black-window{
+    background-color: #00000087;
+}

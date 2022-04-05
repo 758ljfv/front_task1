@@ -3,7 +3,7 @@
   <div class="b-main" v-bind:class="{'black-window': showFilter}">
     <a style="margin-bottom: 40px" class="btn-custom" v-on:click="openModal" href="javascript:void 0">Фильтр</a>
 
-    <modalWindow v-on:close-modal="closeModal" v-if="showFilter === true">
+    <modalWindow v-bind:id="'modal1'" v-on:close-modal="closeModal" v-if="showFilter === true">
       <h3>Фильтр</h3>
       <input v-model="search" class="b-main__search" placeholder="Введите имя или дату">
       <filter-list v-for="item in searchData"
@@ -24,10 +24,15 @@
 
     </list-items>
     <paginate :page-number="pageNumber" :page-count="resultCount" v-on:prevPage="prevPage" v-on:nextPage="nextPage"></paginate>
-    <form v-on:submit.prevent="addNewUser">
-      <input v-model="newUserName" id="new-user" placeholder="Имя юзера">
-      <button>Добавить</button>
-    </form>
+    <a style="margin-bottom: 40px" class="btn-custom" href="#modal2">Фильтр</a>
+
+    <modal-window v-bind:id="'modal2'" v-on:close-modal="closeModal" v-if="showFilter === true">
+      <form v-on:submit.prevent="addNewUser">
+        <input v-model="newUserName" id="new-user" placeholder="Имя юзера">
+        <input type="date" v-model="newUserDate" id="new-date" placeholder="Дата рождения">
+        <button>Добавить</button>
+      </form>
+    </modal-window>
   </div>
 </template>
 
@@ -78,6 +83,7 @@ export default {
       showFilter: false,
       resultPageCount: 0,
       newUserName: '',
+      newUserDate: '',
       maxId
     }
   },
@@ -122,11 +128,10 @@ export default {
       this.pageNumber--;
     },
     addNewUser: function (){
-    let newRandDate = randomDate(new Date(1980, 0, 1), new Date())
       this.arr.push({
         id: this.maxId++,
         name: this.newUserName,
-        date: (newRandDate.toDateString())
+        date: this.newUserDate
       })
       this.newUserName = ''
     }
